@@ -41,5 +41,4 @@ This project is licensed under the MIT License.
 For questions or support related to this API, please contact the project maintainer.
 ####Links:
 * [Linkedin](https://www.linkedin.com/in/wanderson--sousa/).
-* [Instagram](https://www.linkedin.com/in/wanderson--sousa/).
 
