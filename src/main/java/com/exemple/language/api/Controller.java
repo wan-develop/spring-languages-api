@@ -22,7 +22,6 @@ public class Controller {
     @Autowired
     private LanguageRepository repository;
 
-
     //Home
     @GetMapping(value = "/")
     public String getOnline() {
@@ -33,19 +32,13 @@ public class Controller {
     @GetMapping(value = "/languages")
     public ResponseEntity<List<Language>> getLanguages() {
         List<Language> languages = repository.findAll(Sort.by(Direction.ASC, "ranking"));
-
-        ResponseEntity.accepted().build();
-
         return ResponseEntity.ok(languages);
     }
 
     //GET BY ID
     @GetMapping(value = "/language/{id}")
     public ResponseEntity<Language> getLanguages(@PathVariable String id) {
-        Language language = repository.findById(id).get();
-
-        ResponseEntity.accepted();
-        return ResponseEntity.ok(language);
+        return ResponseEntity.ok(repository.findById(id).get());
     }
 
     //ADD
@@ -61,9 +54,9 @@ public class Controller {
         
         Optional<Language> oldData = repository.findById(id);
 
-        if(!oldData.isPresent()) {
+        if(!oldData.isPresent())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        
         Language updatedLanguage = oldData.get();
 
         updatedLanguage.updateFrom(newLanguage);
@@ -76,9 +69,8 @@ public class Controller {
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<String> deleteUpdate(@PathVariable String id) {
         
-        if (!repository.findById(id).isPresent()) {
+        if (!repository.findById(id).isPresent())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
         
         repository.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
